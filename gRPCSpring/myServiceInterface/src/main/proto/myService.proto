@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package com.example;
+
+option java_multiple_files = true;
+option java_package = "com.example.lib";
+option java_outer_classname = "NoteServiceProto";
+
+// The note service definition.
+service MyService {
+  // Creates a new note
+  rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {}
+  
+  // Lists all notes
+  rpc ListNotes (ListNotesRequest) returns (ListNotesResponse) {}
+}
+
+// Request to create a note
+message CreateNoteRequest {
+  string text = 1;
+  string username = 2;
+}
+
+// Response for note creation
+message CreateNoteResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Request to list notes
+message ListNotesRequest {
+  // Empty request
+}
+
+// Response containing list of notes
+message ListNotesResponse {
+  repeated Note notes = 1;
+}
+
+// Note message definition
+message Note {
+  string text = 1;
+  string username = 2;
+  string created_at = 3;
+}

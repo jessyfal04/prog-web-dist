@@ -1,0 +1,38 @@
+package com.example.myServiceClient.web;
+
+import com.example.lib.*;
+import com.example.myServiceClient.service.NoteService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class NoteController {
+
+    private final NoteService noteService;
+
+    public NoteController(NoteService noteService) {
+        this.noteService = noteService;
+    }
+
+    @GetMapping("/")
+    public String showCreateNoteForm() {
+        return "create-note";
+    }
+
+    @PostMapping("/create-note")
+    public String createNote(@RequestParam String text, @RequestParam String username, Model model) {
+        CreateNoteResponse response = noteService.createNote(text, username);
+        model.addAttribute("message", response.getMessage());
+        return "create-note";
+    }
+
+    @GetMapping("/notes")
+    public String getAllNotes(Model model) {
+        GetAllNotesResponse response = noteService.getAllNotes();
+        model.addAttribute("notes", response.getNotesList());
+        return "notes-list";
+    }
+} 
