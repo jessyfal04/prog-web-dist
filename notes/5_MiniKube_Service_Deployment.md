@@ -2,7 +2,7 @@
 
 minikube start --memory 4096 --cpus 4
 minikube addons enable dashboard        # nice visual UI
-minikube addons enable ingress          # nginx-ingress
+#minikube addons enable ingress          # nginx-ingress but useless car we use istio: ingressgateway
 minikube dashboard &
 
 # Server Deployment
