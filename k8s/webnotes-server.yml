@@ -1,0 +1,36 @@
+# k8s/webnotes-server.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webnotes-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webnotes-server
+  template:
+    metadata:
+      labels:
+        app: webnotes-server
+    spec:
+      containers:
+        - name: webnotes-server
+          image: jessyfal04/webnotes-server:latest
+          ports:
+            - containerPort: 9090            # gRPC
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "k8s"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webnotes-server
+spec:
+  selector:
+    app: webnotes-server
+  ports:
+    - name: grpc
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP

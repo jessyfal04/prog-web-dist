@@ -94,3 +94,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Istio ###
+istio-1.25.2/

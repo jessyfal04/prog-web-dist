@@ -15,4 +15,4 @@ cd myServiceClient
 java -jar build/libs/myServiceClient-0.0.1-SNAPSHOT.jar
 
 ## Test via REST → gRPC bridge:
-curl http://localhost:8080/world
+curl http://localhost:8080/
