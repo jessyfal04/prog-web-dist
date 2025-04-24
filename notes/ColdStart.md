@@ -79,3 +79,8 @@ kubectl get pods -n webnotes
 ```bash
 kubectl exec -it $(kubectl get pods -n webnotes | grep mysql | awk '{print $1}') -n webnotes -- mysql -uuser -ptest1234 -e "USE db; DESCRIBE notes; SELECT * FROM notes;"
 ```
+
+### rollout
+```bash
+kubectl rollout restart deployment webnotes-server -n webnotes && kubectl rollout restart deployment webnotes-client -n webnotes
+```

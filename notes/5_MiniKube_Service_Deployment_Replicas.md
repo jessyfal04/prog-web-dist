@@ -13,7 +13,7 @@ kind: Deployment
 metadata:
   name: webnotes-server
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: webnotes-server
@@ -53,7 +53,7 @@ kind: Deployment
 metadata:
   name: webnotes-client
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: webnotes-client
@@ -88,6 +88,8 @@ spec:
       targetPort: 8080
   type: ClusterIP
 ```
+
+We have 2 replicas here
 
 # Apply the configuration
 kubectl apply -f k8s/webnotes-server.yml
