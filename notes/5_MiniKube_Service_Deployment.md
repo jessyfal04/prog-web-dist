@@ -45,10 +45,6 @@ spec:
   type: ClusterIP
 ```
 
-## We apply the configuration
-kubectl apply -f k8s/webnotes-server.yml
-kubectl get pods
-
 # Client Deployment
 ```
 # k8s/webnotes-client.yml

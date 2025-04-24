@@ -1,40 +1,38 @@
 package com.example.myServiceServer;
 
 import com.example.lib.*;
+import com.example.myServiceServer.model.NoteEntity;
+import com.example.myServiceServer.repository.NoteRepository;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @GrpcService
 public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
     
-    private final List<Note> notes = new ArrayList<>();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    
+    @Autowired
+    private NoteRepository noteRepository;
 
     @Override
     public void createNote(CreateNoteRequest request, StreamObserver<CreateNoteResponse> responseObserver) {
-        String createdAt = LocalDateTime.now().format(formatter);
-        String noteId = UUID.randomUUID().toString();
+        NoteEntity noteEntity = new NoteEntity();
+        noteEntity.setText(request.getText());
+        noteEntity.setUsername(request.getUsername());
+        noteEntity.setCreatedAt(LocalDateTime.now());
+        noteEntity.setThumbsUpCount(0);
         
-        Note note = Note.newBuilder()
-                .setId(noteId)
-                .setText(request.getText())
-                .setUsername(request.getUsername())
-                .setCreatedAt(createdAt)
-                .setThumbsUpCount(0)
-                .build();
-        
-        notes.add(note);
+        noteEntity = noteRepository.save(noteEntity);
         
         CreateNoteResponse response = CreateNoteResponse.newBuilder()
                 .setSuccess(true)
                 .setMessage("Note created successfully")
-                .setNoteId(noteId)
+                .setNoteId(noteEntity.getId().toString())
                 .build();
         
         responseObserver.onNext(response);
@@ -43,6 +41,18 @@ public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
 
     @Override
     public void listNotes(ListNotesRequest request, StreamObserver<ListNotesResponse> responseObserver) {
+        List<NoteEntity> noteEntities = noteRepository.findAll();
+        
+        List<Note> notes = noteEntities.stream()
+                .map(entity -> Note.newBuilder()
+                        .setId(entity.getId().toString())
+                        .setText(entity.getText())
+                        .setUsername(entity.getUsername())
+                        .setCreatedAt(entity.getCreatedAt().format(formatter))
+                        .setThumbsUpCount(entity.getThumbsUpCount())
+                        .build())
+                .collect(Collectors.toList());
+        
         ListNotesResponse response = ListNotesResponse.newBuilder()
                 .addAllNotes(notes)
                 .build();
@@ -53,24 +63,17 @@ public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
 
     @Override
     public void updateNoteThumbsUp(UpdateNoteThumbsUpRequest request, StreamObserver<UpdateNoteThumbsUpResponse> responseObserver) {
-        Optional<Note> noteOpt = notes.stream()
-                .filter(n -> n.getId().equals(request.getNoteId()))
-                .findFirst();
+        Long noteId = Long.parseLong(request.getNoteId());
+        NoteEntity noteEntity = noteRepository.findById(noteId).orElse(null);
 
-        if (noteOpt.isPresent()) {
-            Note note = noteOpt.get();
-            int newCount = note.getThumbsUpCount() + 1;
-            
-            Note updatedNote = Note.newBuilder(note)
-                    .setThumbsUpCount(newCount)
-                    .build();
-            
-            notes.set(notes.indexOf(note), updatedNote);
+        if (noteEntity != null) {
+            noteEntity.setThumbsUpCount(noteEntity.getThumbsUpCount() + 1);
+            noteEntity = noteRepository.save(noteEntity);
             
             UpdateNoteThumbsUpResponse response = UpdateNoteThumbsUpResponse.newBuilder()
                     .setSuccess(true)
                     .setMessage("Thumbs up updated successfully")
-                    .setThumbsUpCount(newCount)
+                    .setThumbsUpCount(noteEntity.getThumbsUpCount())
                     .build();
             
             responseObserver.onNext(response);
@@ -89,11 +92,16 @@ public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
 
     @Override
     public void deleteNote(DeleteNoteRequest request, StreamObserver<DeleteNoteResponse> responseObserver) {
-        boolean removed = notes.removeIf(note -> note.getId().equals(request.getNoteId()));
+        Long noteId = Long.parseLong(request.getNoteId());
+        boolean exists = noteRepository.existsById(noteId);
+        
+        if (exists) {
+            noteRepository.deleteById(noteId);
+        }
         
         DeleteNoteResponse response = DeleteNoteResponse.newBuilder()
-                .setSuccess(removed)
-                .setMessage(removed ? "Note deleted successfully" : "Note not found")
+                .setSuccess(exists)
+                .setMessage(exists ? "Note deleted successfully" : "Note not found")
                 .build();
         
         responseObserver.onNext(response);

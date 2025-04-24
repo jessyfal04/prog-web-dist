@@ -5,6 +5,7 @@ This project implements a distributed note-taking application using gRPC (Google
 - A gRPC server that stores and manages notes
 - A gRPC client that provides a web interface
 - A shared interface module that defines the service contract
+- A MySQL database for persistent storage
 
 ## Project Structure
 ```
@@ -16,7 +17,13 @@ gRPCSpring/
 ├── myServiceServer/            # gRPC server implementation
 │   ├── src/main/java/
 │   │   └── com/example/myServiceServer/
-│   │       └── MyServiceImpl.java  # Server implementation
+│   │       ├── MyServiceImpl.java  # Server implementation
+│   │       ├── model/
+│   │       │   └── NoteEntity.java # JPA Entity
+│   │       └── repository/
+│   │           └── NoteRepository.java # JPA Repository
+│   ├── src/main/resources/
+│   │   └── application-k8s.yml    # Kubernetes configuration
 │   └── build.gradle            # Server module build configuration
 └── myServiceClient/            # Web client implementation
     ├── src/main/java/
@@ -42,6 +49,42 @@ gRPCSpring/
 - Thymeleaf (templating)
 - Bootstrap (UI)
 - Gradle (build system)
+- MySQL 8.0 (database)
+- JPA/Hibernate (ORM)
+- Kubernetes (deployment)
+- Istio (service mesh)
+
+## Database Configuration
+The application uses MySQL for persistent storage with automatic schema creation through JPA. The database configuration is managed through Kubernetes secrets and environment variables:
+
+```yaml
+# application-k8s.yml
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/db?createDatabaseIfNotExist=true
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+```
+
+## Database Schema
+The application automatically creates the following database schema through JPA:
+```sql
+CREATE TABLE notes (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    text VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    created_at DATETIME(6),
+    thumbs_up_count INT
+);
+```
 
 ## Functionality
 
@@ -53,6 +96,7 @@ gRPCSpring/
   - Creation timestamp
 - Form submission is handled via AJAX
 - Success/error messages are displayed without page refresh
+- Notes are persisted in MySQL database
 
 ### 2. Note Listing
 - Users can view all notes in a card layout
@@ -62,6 +106,7 @@ gRPCSpring/
   - Creation timestamp
 - List auto-refreshes every 5 seconds
 - Real-time updates without page refresh
+- Data is fetched from MySQL database
 
 ### 3. API Endpoints
 - REST API:
@@ -94,6 +139,7 @@ message CreateNoteRequest {
 message CreateNoteResponse {
   bool success = 1;
   string message = 2;
+  string noteId = 3;
 }
 
 message ListNotesRequest {}
@@ -103,9 +149,11 @@ message ListNotesResponse {
 }
 
 message Note {
-  string text = 1;
-  string username = 2;
-  string created_at = 3;
+  string id = 1;
+  string text = 2;
+  string username = 3;
+  string created_at = 4;
+  int32 thumbs_up_count = 5;
 }
 
 message UpdateNoteThumbsUpRequest {
@@ -115,6 +163,7 @@ message UpdateNoteThumbsUpRequest {
 message UpdateNoteThumbsUpResponse {
   bool success = 1;
   string message = 2;
+  int32 thumbs_up_count = 3;
 }
 
 message DeleteNoteRequest {
@@ -128,10 +177,11 @@ message DeleteNoteResponse {
 ```
 
 ### Server Implementation (`MyServiceImpl.java`)
-- In-memory note storage
+- MySQL database storage using JPA
 - Handles note creation and listing
 - Uses `@GrpcService` annotation
 - Maintains note list with timestamps
+- Automatic table creation and updates
 
 ### Client Implementation
 1. **Web Interface**:
@@ -150,9 +200,7 @@ message DeleteNoteResponse {
    - Service stub injection
    - Protocol Buffers message handling
 
-4. Access the application:
-   - Create notes: http://localhost:8080/
-   - View notes: http://localhost:8080/notes
+
 
 ## Dependencies
 - Spring Boot 3.3.3
@@ -163,10 +211,14 @@ message DeleteNoteResponse {
 - Protocol Buffers 3.23.4
 - gRPC 1.58.0
 - Protobuf Gradle Plugin 0.8.18
+- MySQL Connector 8.0.33
+- Spring Data JPA
+- Hibernate
 
 ## Configuration
 - Server port: 8080
 - gRPC server port: 9090
+- MySQL port: 3306
 - Thymeleaf template configuration
 - Java 17 toolchain
 - Gradle build system with modern task configuration

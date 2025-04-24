@@ -1,7 +1,8 @@
 plugins {
+	id 'java'
 	id 'org.springframework.boot' version '3.3.3'
 	id 'io.spring.dependency-management' version '1.1.6'
-	id 'java'
+	id 'com.google.protobuf' version '0.8.18'
 }
 
 group = 'com.example'
@@ -11,6 +12,7 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+	sourceCompatibility = '17'
 }
 
 repositories {
@@ -19,11 +21,37 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
+	implementation 'net.devh:grpc-server-spring-boot-starter:2.15.0.RELEASE'
+	implementation 'com.google.protobuf:protobuf-java:3.23.4'
+	implementation 'io.grpc:grpc-stub:1.58.0'
+	implementation 'io.grpc:grpc-protobuf:1.58.0'
+	implementation 'io.grpc:grpc-netty-shaded:1.58.0'
+	
+	// JPA and Database dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	
+	// Interface project
 	implementation project(':myServiceInterface')
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.23.4'
+	}
+	plugins {
+		grpc {
+			artifact = 'io.grpc:protoc-gen-grpc-java:1.58.0'
+		}
+	}
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {}
+		}
+	}
 }
 
 tasks.named('test') {
