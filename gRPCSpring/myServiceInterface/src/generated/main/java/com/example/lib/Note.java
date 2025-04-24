@@ -20,6 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Note() {
+    id_ = "";
     text_ = "";
     username_ = "";
     createdAt_ = "";
@@ -45,11 +46,50 @@ private static final long serialVersionUID = 0L;
             com.example.lib.Note.class, com.example.lib.Note.Builder.class);
   }
 
-  public static final int TEXT_FIELD_NUMBER = 1;
+  public static final int ID_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object id_ = "";
+  /**
+   * <code>string id = 1;</code>
+   * @return The id.
+   */
+  @java.lang.Override
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      id_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string id = 1;</code>
+   * @return The bytes for id.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getIdBytes() {
+    java.lang.Object ref = id_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      id_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int TEXT_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
   private volatile java.lang.Object text_ = "";
   /**
-   * <code>string text = 1;</code>
+   * <code>string text = 2;</code>
    * @return The text.
    */
   @java.lang.Override
@@ -66,7 +106,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string text = 1;</code>
+   * <code>string text = 2;</code>
    * @return The bytes for text.
    */
   @java.lang.Override
@@ -84,11 +124,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int USERNAME_FIELD_NUMBER = 2;
+  public static final int USERNAME_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object username_ = "";
   /**
-   * <code>string username = 2;</code>
+   * <code>string username = 3;</code>
    * @return The username.
    */
   @java.lang.Override
@@ -105,7 +145,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string username = 2;</code>
+   * <code>string username = 3;</code>
    * @return The bytes for username.
    */
   @java.lang.Override
@@ -123,11 +163,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int CREATED_AT_FIELD_NUMBER = 3;
+  public static final int CREATED_AT_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
   private volatile java.lang.Object createdAt_ = "";
   /**
-   * <code>string created_at = 3;</code>
+   * <code>string created_at = 4;</code>
    * @return The createdAt.
    */
   @java.lang.Override
@@ -144,7 +184,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string created_at = 3;</code>
+   * <code>string created_at = 4;</code>
    * @return The bytes for createdAt.
    */
   @java.lang.Override
@@ -162,6 +202,17 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int THUMBS_UP_COUNT_FIELD_NUMBER = 5;
+  private int thumbsUpCount_ = 0;
+  /**
+   * <code>int32 thumbs_up_count = 5;</code>
+   * @return The thumbsUpCount.
+   */
+  @java.lang.Override
+  public int getThumbsUpCount() {
+    return thumbsUpCount_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -176,14 +227,20 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(text_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, text_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(username_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, username_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, username_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createdAt_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, createdAt_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, createdAt_);
+    }
+    if (thumbsUpCount_ != 0) {
+      output.writeInt32(5, thumbsUpCount_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -194,14 +251,21 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(text_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, text_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(username_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, username_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, username_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createdAt_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, createdAt_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, createdAt_);
+    }
+    if (thumbsUpCount_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(5, thumbsUpCount_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -218,12 +282,16 @@ private static final long serialVersionUID = 0L;
     }
     com.example.lib.Note other = (com.example.lib.Note) obj;
 
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!getText()
         .equals(other.getText())) return false;
     if (!getUsername()
         .equals(other.getUsername())) return false;
     if (!getCreatedAt()
         .equals(other.getCreatedAt())) return false;
+    if (getThumbsUpCount()
+        != other.getThumbsUpCount()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -235,12 +303,16 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + TEXT_FIELD_NUMBER;
     hash = (53 * hash) + getText().hashCode();
     hash = (37 * hash) + USERNAME_FIELD_NUMBER;
     hash = (53 * hash) + getUsername().hashCode();
     hash = (37 * hash) + CREATED_AT_FIELD_NUMBER;
     hash = (53 * hash) + getCreatedAt().hashCode();
+    hash = (37 * hash) + THUMBS_UP_COUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getThumbsUpCount();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -376,9 +448,11 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      id_ = "";
       text_ = "";
       username_ = "";
       createdAt_ = "";
+      thumbsUpCount_ = 0;
       return this;
     }
 
@@ -413,13 +487,19 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.example.lib.Note result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.text_ = text_;
+        result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.username_ = username_;
+        result.text_ = text_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.username_ = username_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
         result.createdAt_ = createdAt_;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.thumbsUpCount_ = thumbsUpCount_;
       }
     }
 
@@ -467,20 +547,28 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.example.lib.Note other) {
       if (other == com.example.lib.Note.getDefaultInstance()) return this;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
       if (!other.getText().isEmpty()) {
         text_ = other.text_;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
       }
       if (!other.getUsername().isEmpty()) {
         username_ = other.username_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       if (!other.getCreatedAt().isEmpty()) {
         createdAt_ = other.createdAt_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
+      }
+      if (other.getThumbsUpCount() != 0) {
+        setThumbsUpCount(other.getThumbsUpCount());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -509,20 +597,30 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              text_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
             case 18: {
-              username_ = input.readStringRequireUtf8();
+              text_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              createdAt_ = input.readStringRequireUtf8();
+              username_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
+            case 34: {
+              createdAt_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
+            case 40: {
+              thumbsUpCount_ = input.readInt32();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 40
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -540,9 +638,81 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
+    private java.lang.Object id_ = "";
+    /**
+     * <code>string id = 1;</code>
+     * @return The id.
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        id_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The id to set.
+     * @return This builder for chaining.
+     */
+    public Builder setId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      id_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The bytes for id to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      id_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object text_ = "";
     /**
-     * <code>string text = 1;</code>
+     * <code>string text = 2;</code>
      * @return The text.
      */
     public java.lang.String getText() {
@@ -558,7 +728,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string text = 1;</code>
+     * <code>string text = 2;</code>
      * @return The bytes for text.
      */
     public com.google.protobuf.ByteString
@@ -575,7 +745,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string text = 1;</code>
+     * <code>string text = 2;</code>
      * @param value The text to set.
      * @return This builder for chaining.
      */
@@ -583,22 +753,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       text_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string text = 1;</code>
+     * <code>string text = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearText() {
       text_ = getDefaultInstance().getText();
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string text = 1;</code>
+     * <code>string text = 2;</code>
      * @param value The bytes for text to set.
      * @return This builder for chaining.
      */
@@ -607,14 +777,14 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       text_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
 
     private java.lang.Object username_ = "";
     /**
-     * <code>string username = 2;</code>
+     * <code>string username = 3;</code>
      * @return The username.
      */
     public java.lang.String getUsername() {
@@ -630,7 +800,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string username = 2;</code>
+     * <code>string username = 3;</code>
      * @return The bytes for username.
      */
     public com.google.protobuf.ByteString
@@ -647,7 +817,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string username = 2;</code>
+     * <code>string username = 3;</code>
      * @param value The username to set.
      * @return This builder for chaining.
      */
@@ -655,22 +825,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       username_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string username = 2;</code>
+     * <code>string username = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearUsername() {
       username_ = getDefaultInstance().getUsername();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string username = 2;</code>
+     * <code>string username = 3;</code>
      * @param value The bytes for username to set.
      * @return This builder for chaining.
      */
@@ -679,14 +849,14 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       username_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
     private java.lang.Object createdAt_ = "";
     /**
-     * <code>string created_at = 3;</code>
+     * <code>string created_at = 4;</code>
      * @return The createdAt.
      */
     public java.lang.String getCreatedAt() {
@@ -702,7 +872,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string created_at = 3;</code>
+     * <code>string created_at = 4;</code>
      * @return The bytes for createdAt.
      */
     public com.google.protobuf.ByteString
@@ -719,7 +889,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string created_at = 3;</code>
+     * <code>string created_at = 4;</code>
      * @param value The createdAt to set.
      * @return This builder for chaining.
      */
@@ -727,22 +897,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       createdAt_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>string created_at = 3;</code>
+     * <code>string created_at = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearCreatedAt() {
       createdAt_ = getDefaultInstance().getCreatedAt();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>string created_at = 3;</code>
+     * <code>string created_at = 4;</code>
      * @param value The bytes for createdAt to set.
      * @return This builder for chaining.
      */
@@ -751,7 +921,39 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       createdAt_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+
+    private int thumbsUpCount_ ;
+    /**
+     * <code>int32 thumbs_up_count = 5;</code>
+     * @return The thumbsUpCount.
+     */
+    @java.lang.Override
+    public int getThumbsUpCount() {
+      return thumbsUpCount_;
+    }
+    /**
+     * <code>int32 thumbs_up_count = 5;</code>
+     * @param value The thumbsUpCount to set.
+     * @return This builder for chaining.
+     */
+    public Builder setThumbsUpCount(int value) {
+
+      thumbsUpCount_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 thumbs_up_count = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearThumbsUpCount() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      thumbsUpCount_ = 0;
       onChanged();
       return this;
     }

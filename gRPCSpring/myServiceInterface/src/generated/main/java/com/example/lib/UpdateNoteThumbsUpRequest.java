@@ -5,22 +5,21 @@ package com.example.lib;
 
 /**
  * <pre>
- * Response for note creation
+ * Request to update thumbs up
  * </pre>
  *
- * Protobuf type {@code com.example.CreateNoteResponse}
+ * Protobuf type {@code com.example.UpdateNoteThumbsUpRequest}
  */
-public final class CreateNoteResponse extends
+public final class UpdateNoteThumbsUpRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:com.example.CreateNoteResponse)
-    CreateNoteResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:com.example.UpdateNoteThumbsUpRequest)
+    UpdateNoteThumbsUpRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use CreateNoteResponse.newBuilder() to construct.
-  private CreateNoteResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use UpdateNoteThumbsUpRequest.newBuilder() to construct.
+  private UpdateNoteThumbsUpRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private CreateNoteResponse() {
-    message_ = "";
+  private UpdateNoteThumbsUpRequest() {
     noteId_ = "";
   }
 
@@ -28,77 +27,27 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new CreateNoteResponse();
+    return new UpdateNoteThumbsUpRequest();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.example.lib.NoteServiceProto.internal_static_com_example_CreateNoteResponse_descriptor;
+    return com.example.lib.NoteServiceProto.internal_static_com_example_UpdateNoteThumbsUpRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.example.lib.NoteServiceProto.internal_static_com_example_CreateNoteResponse_fieldAccessorTable
+    return com.example.lib.NoteServiceProto.internal_static_com_example_UpdateNoteThumbsUpRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.example.lib.CreateNoteResponse.class, com.example.lib.CreateNoteResponse.Builder.class);
+            com.example.lib.UpdateNoteThumbsUpRequest.class, com.example.lib.UpdateNoteThumbsUpRequest.Builder.class);
   }
 
-  public static final int SUCCESS_FIELD_NUMBER = 1;
-  private boolean success_ = false;
-  /**
-   * <code>bool success = 1;</code>
-   * @return The success.
-   */
-  @java.lang.Override
-  public boolean getSuccess() {
-    return success_;
-  }
-
-  public static final int MESSAGE_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object message_ = "";
-  /**
-   * <code>string message = 2;</code>
-   * @return The message.
-   */
-  @java.lang.Override
-  public java.lang.String getMessage() {
-    java.lang.Object ref = message_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      message_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string message = 2;</code>
-   * @return The bytes for message.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getMessageBytes() {
-    java.lang.Object ref = message_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      message_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int NOTE_ID_FIELD_NUMBER = 3;
+  public static final int NOTE_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object noteId_ = "";
   /**
-   * <code>string note_id = 3;</code>
+   * <code>string note_id = 1;</code>
    * @return The noteId.
    */
   @java.lang.Override
@@ -115,7 +64,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string note_id = 3;</code>
+   * <code>string note_id = 1;</code>
    * @return The bytes for noteId.
    */
   @java.lang.Override
@@ -147,14 +96,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (success_ != false) {
-      output.writeBool(1, success_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(noteId_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, noteId_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, noteId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -165,15 +108,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (success_ != false) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(1, success_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(noteId_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, noteId_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, noteId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -185,15 +121,11 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.example.lib.CreateNoteResponse)) {
+    if (!(obj instanceof com.example.lib.UpdateNoteThumbsUpRequest)) {
       return super.equals(obj);
     }
-    com.example.lib.CreateNoteResponse other = (com.example.lib.CreateNoteResponse) obj;
+    com.example.lib.UpdateNoteThumbsUpRequest other = (com.example.lib.UpdateNoteThumbsUpRequest) obj;
 
-    if (getSuccess()
-        != other.getSuccess()) return false;
-    if (!getMessage()
-        .equals(other.getMessage())) return false;
     if (!getNoteId()
         .equals(other.getNoteId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -207,11 +139,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-        getSuccess());
-    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-    hash = (53 * hash) + getMessage().hashCode();
     hash = (37 * hash) + NOTE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getNoteId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -219,44 +146,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(byte[] data)
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(java.io.InputStream input)
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -264,26 +191,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.example.lib.CreateNoteResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.example.lib.CreateNoteResponse parseDelimitedFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.example.lib.CreateNoteResponse parseFrom(
+  public static com.example.lib.UpdateNoteThumbsUpRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -296,7 +223,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.example.lib.CreateNoteResponse prototype) {
+  public static Builder newBuilder(com.example.lib.UpdateNoteThumbsUpRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -313,29 +240,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Response for note creation
+   * Request to update thumbs up
    * </pre>
    *
-   * Protobuf type {@code com.example.CreateNoteResponse}
+   * Protobuf type {@code com.example.UpdateNoteThumbsUpRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:com.example.CreateNoteResponse)
-      com.example.lib.CreateNoteResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:com.example.UpdateNoteThumbsUpRequest)
+      com.example.lib.UpdateNoteThumbsUpRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.example.lib.NoteServiceProto.internal_static_com_example_CreateNoteResponse_descriptor;
+      return com.example.lib.NoteServiceProto.internal_static_com_example_UpdateNoteThumbsUpRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.example.lib.NoteServiceProto.internal_static_com_example_CreateNoteResponse_fieldAccessorTable
+      return com.example.lib.NoteServiceProto.internal_static_com_example_UpdateNoteThumbsUpRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.example.lib.CreateNoteResponse.class, com.example.lib.CreateNoteResponse.Builder.class);
+              com.example.lib.UpdateNoteThumbsUpRequest.class, com.example.lib.UpdateNoteThumbsUpRequest.Builder.class);
     }
 
-    // Construct using com.example.lib.CreateNoteResponse.newBuilder()
+    // Construct using com.example.lib.UpdateNoteThumbsUpRequest.newBuilder()
     private Builder() {
 
     }
@@ -349,8 +276,6 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      success_ = false;
-      message_ = "";
       noteId_ = "";
       return this;
     }
@@ -358,17 +283,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.example.lib.NoteServiceProto.internal_static_com_example_CreateNoteResponse_descriptor;
+      return com.example.lib.NoteServiceProto.internal_static_com_example_UpdateNoteThumbsUpRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.example.lib.CreateNoteResponse getDefaultInstanceForType() {
-      return com.example.lib.CreateNoteResponse.getDefaultInstance();
+    public com.example.lib.UpdateNoteThumbsUpRequest getDefaultInstanceForType() {
+      return com.example.lib.UpdateNoteThumbsUpRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.example.lib.CreateNoteResponse build() {
-      com.example.lib.CreateNoteResponse result = buildPartial();
+    public com.example.lib.UpdateNoteThumbsUpRequest build() {
+      com.example.lib.UpdateNoteThumbsUpRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -376,22 +301,16 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.example.lib.CreateNoteResponse buildPartial() {
-      com.example.lib.CreateNoteResponse result = new com.example.lib.CreateNoteResponse(this);
+    public com.example.lib.UpdateNoteThumbsUpRequest buildPartial() {
+      com.example.lib.UpdateNoteThumbsUpRequest result = new com.example.lib.UpdateNoteThumbsUpRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.example.lib.CreateNoteResponse result) {
+    private void buildPartial0(com.example.lib.UpdateNoteThumbsUpRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.success_ = success_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.message_ = message_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.noteId_ = noteId_;
       }
     }
@@ -430,27 +349,19 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.example.lib.CreateNoteResponse) {
-        return mergeFrom((com.example.lib.CreateNoteResponse)other);
+      if (other instanceof com.example.lib.UpdateNoteThumbsUpRequest) {
+        return mergeFrom((com.example.lib.UpdateNoteThumbsUpRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.example.lib.CreateNoteResponse other) {
-      if (other == com.example.lib.CreateNoteResponse.getDefaultInstance()) return this;
-      if (other.getSuccess() != false) {
-        setSuccess(other.getSuccess());
-      }
-      if (!other.getMessage().isEmpty()) {
-        message_ = other.message_;
-        bitField0_ |= 0x00000002;
-        onChanged();
-      }
+    public Builder mergeFrom(com.example.lib.UpdateNoteThumbsUpRequest other) {
+      if (other == com.example.lib.UpdateNoteThumbsUpRequest.getDefaultInstance()) return this;
       if (!other.getNoteId().isEmpty()) {
         noteId_ = other.noteId_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000001;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -479,21 +390,11 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              success_ = input.readBool();
+            case 10: {
+              noteId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
-            case 18: {
-              message_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 18
-            case 26: {
-              noteId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 26
+            } // case 10
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -511,113 +412,9 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private boolean success_ ;
-    /**
-     * <code>bool success = 1;</code>
-     * @return The success.
-     */
-    @java.lang.Override
-    public boolean getSuccess() {
-      return success_;
-    }
-    /**
-     * <code>bool success = 1;</code>
-     * @param value The success to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSuccess(boolean value) {
-
-      success_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>bool success = 1;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSuccess() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      success_ = false;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object message_ = "";
-    /**
-     * <code>string message = 2;</code>
-     * @return The message.
-     */
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        message_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string message = 2;</code>
-     * @return The bytes for message.
-     */
-    public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        message_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string message = 2;</code>
-     * @param value The message to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMessage(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      message_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string message = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearMessage() {
-      message_ = getDefaultInstance().getMessage();
-      bitField0_ = (bitField0_ & ~0x00000002);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string message = 2;</code>
-     * @param value The bytes for message to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMessageBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      message_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object noteId_ = "";
     /**
-     * <code>string note_id = 3;</code>
+     * <code>string note_id = 1;</code>
      * @return The noteId.
      */
     public java.lang.String getNoteId() {
@@ -633,7 +430,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string note_id = 3;</code>
+     * <code>string note_id = 1;</code>
      * @return The bytes for noteId.
      */
     public com.google.protobuf.ByteString
@@ -650,7 +447,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string note_id = 3;</code>
+     * <code>string note_id = 1;</code>
      * @param value The noteId to set.
      * @return This builder for chaining.
      */
@@ -658,22 +455,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       noteId_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string note_id = 3;</code>
+     * <code>string note_id = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearNoteId() {
       noteId_ = getDefaultInstance().getNoteId();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string note_id = 3;</code>
+     * <code>string note_id = 1;</code>
      * @param value The bytes for noteId to set.
      * @return This builder for chaining.
      */
@@ -682,7 +479,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       noteId_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
@@ -699,23 +496,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:com.example.CreateNoteResponse)
+    // @@protoc_insertion_point(builder_scope:com.example.UpdateNoteThumbsUpRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:com.example.CreateNoteResponse)
-  private static final com.example.lib.CreateNoteResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:com.example.UpdateNoteThumbsUpRequest)
+  private static final com.example.lib.UpdateNoteThumbsUpRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.example.lib.CreateNoteResponse();
+    DEFAULT_INSTANCE = new com.example.lib.UpdateNoteThumbsUpRequest();
   }
 
-  public static com.example.lib.CreateNoteResponse getDefaultInstance() {
+  public static com.example.lib.UpdateNoteThumbsUpRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<CreateNoteResponse>
-      PARSER = new com.google.protobuf.AbstractParser<CreateNoteResponse>() {
+  private static final com.google.protobuf.Parser<UpdateNoteThumbsUpRequest>
+      PARSER = new com.google.protobuf.AbstractParser<UpdateNoteThumbsUpRequest>() {
     @java.lang.Override
-    public CreateNoteResponse parsePartialFrom(
+    public UpdateNoteThumbsUpRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -734,17 +531,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<CreateNoteResponse> parser() {
+  public static com.google.protobuf.Parser<UpdateNoteThumbsUpRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<CreateNoteResponse> getParserForType() {
+  public com.google.protobuf.Parser<UpdateNoteThumbsUpRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.example.lib.CreateNoteResponse getDefaultInstanceForType() {
+  public com.example.lib.UpdateNoteThumbsUpRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

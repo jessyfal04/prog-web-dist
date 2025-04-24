@@ -22,4 +22,18 @@ public class MyService {
         ListNotesRequest request = ListNotesRequest.newBuilder().build();
         return myServiceStub.listNotes(request);
     }
+
+    public UpdateNoteThumbsUpResponse updateNoteThumbsUp(String noteId) {
+        UpdateNoteThumbsUpRequest request = UpdateNoteThumbsUpRequest.newBuilder()
+                .setNoteId(noteId)
+                .build();
+        return myServiceStub.updateNoteThumbsUp(request);
+    }
+
+    public DeleteNoteResponse deleteNote(String noteId) {
+        DeleteNoteRequest request = DeleteNoteRequest.newBuilder()
+                .setNoteId(noteId)
+                .build();
+        return myServiceStub.deleteNote(request);
+    }
 }

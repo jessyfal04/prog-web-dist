@@ -1,0 +1,7 @@
+Create a note unique ID
+
+Modify the code so we have 2 more http command (still gRPC)
+- UPDATE for adding a thump up functionnality, with a count, the get adapt
+- DELETE for adding a note removal option
+
+When you finished, update the WebNotes md to reflect your changes

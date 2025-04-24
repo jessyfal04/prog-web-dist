@@ -3,8 +3,8 @@
 
 package com.example.lib;
 
-public interface CreateNoteResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:com.example.CreateNoteResponse)
+public interface DeleteNoteResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:com.example.DeleteNoteResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -24,16 +24,4 @@ public interface CreateNoteResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
-
-  /**
-   * <code>string note_id = 3;</code>
-   * @return The noteId.
-   */
-  java.lang.String getNoteId();
-  /**
-   * <code>string note_id = 3;</code>
-   * @return The bytes for noteId.
-   */
-  com.google.protobuf.ByteString
-      getNoteIdBytes();
 }

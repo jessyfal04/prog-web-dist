@@ -13,6 +13,12 @@ service MyService {
   
   // Lists all notes
   rpc ListNotes (ListNotesRequest) returns (ListNotesResponse) {}
+
+  // Updates a note's thumbs up count
+  rpc UpdateNoteThumbsUp (UpdateNoteThumbsUpRequest) returns (UpdateNoteThumbsUpResponse) {}
+
+  // Deletes a note
+  rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse) {}
 }
 
 // Request to create a note
@@ -25,6 +31,7 @@ message CreateNoteRequest {
 message CreateNoteResponse {
   bool success = 1;
   string message = 2;
+  string note_id = 3;
 }
 
 // Request to list notes
@@ -37,9 +44,34 @@ message ListNotesResponse {
   repeated Note notes = 1;
 }
 
+// Request to update thumbs up
+message UpdateNoteThumbsUpRequest {
+  string note_id = 1;
+}
+
+// Response for thumbs up update
+message UpdateNoteThumbsUpResponse {
+  bool success = 1;
+  string message = 2;
+  int32 thumbs_up_count = 3;
+}
+
+// Request to delete a note
+message DeleteNoteRequest {
+  string note_id = 1;
+}
+
+// Response for note deletion
+message DeleteNoteResponse {
+  bool success = 1;
+  string message = 2;
+}
+
 // Note message definition
 message Note {
-  string text = 1;
-  string username = 2;
-  string created_at = 3;
+  string id = 1;
+  string text = 2;
+  string username = 3;
+  string created_at = 4;
+  int32 thumbs_up_count = 5;
 }

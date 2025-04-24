@@ -35,6 +35,26 @@ public final class NoteServiceProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_example_ListNotesResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_example_UpdateNoteThumbsUpRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_UpdateNoteThumbsUpRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_example_UpdateNoteThumbsUpResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_UpdateNoteThumbsUpResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_example_DeleteNoteRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_DeleteNoteRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_example_DeleteNoteResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_DeleteNoteResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_example_Note_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -50,17 +70,29 @@ public final class NoteServiceProto {
     java.lang.String[] descriptorData = {
       "\n\017myService.proto\022\013com.example\"3\n\021Create" +
       "NoteRequest\022\014\n\004text\030\001 \001(\t\022\020\n\010username\030\002 " +
-      "\001(\t\"6\n\022CreateNoteResponse\022\017\n\007success\030\001 \001" +
-      "(\010\022\017\n\007message\030\002 \001(\t\"\022\n\020ListNotesRequest\"" +
-      "5\n\021ListNotesResponse\022 \n\005notes\030\001 \003(\0132\021.co" +
-      "m.example.Note\":\n\004Note\022\014\n\004text\030\001 \001(\t\022\020\n\010" +
-      "username\030\002 \001(\t\022\022\n\ncreated_at\030\003 \001(\t2\252\001\n\tM" +
-      "yService\022O\n\nCreateNote\022\036.com.example.Cre" +
-      "ateNoteRequest\032\037.com.example.CreateNoteR" +
-      "esponse\"\000\022L\n\tListNotes\022\035.com.example.Lis" +
-      "tNotesRequest\032\036.com.example.ListNotesRes" +
-      "ponse\"\000B%\n\017com.example.libB\020NoteServiceP" +
-      "rotoP\001b\006proto3"
+      "\001(\t\"G\n\022CreateNoteResponse\022\017\n\007success\030\001 \001" +
+      "(\010\022\017\n\007message\030\002 \001(\t\022\017\n\007note_id\030\003 \001(\t\"\022\n\020" +
+      "ListNotesRequest\"5\n\021ListNotesResponse\022 \n" +
+      "\005notes\030\001 \003(\0132\021.com.example.Note\",\n\031Updat" +
+      "eNoteThumbsUpRequest\022\017\n\007note_id\030\001 \001(\t\"W\n" +
+      "\032UpdateNoteThumbsUpResponse\022\017\n\007success\030\001" +
+      " \001(\010\022\017\n\007message\030\002 \001(\t\022\027\n\017thumbs_up_count" +
+      "\030\003 \001(\005\"$\n\021DeleteNoteRequest\022\017\n\007note_id\030\001" +
+      " \001(\t\"6\n\022DeleteNoteResponse\022\017\n\007success\030\001 " +
+      "\001(\010\022\017\n\007message\030\002 \001(\t\"_\n\004Note\022\n\n\002id\030\001 \001(\t" +
+      "\022\014\n\004text\030\002 \001(\t\022\020\n\010username\030\003 \001(\t\022\022\n\ncrea" +
+      "ted_at\030\004 \001(\t\022\027\n\017thumbs_up_count\030\005 \001(\0052\344\002" +
+      "\n\tMyService\022O\n\nCreateNote\022\036.com.example." +
+      "CreateNoteRequest\032\037.com.example.CreateNo" +
+      "teResponse\"\000\022L\n\tListNotes\022\035.com.example." +
+      "ListNotesRequest\032\036.com.example.ListNotes" +
+      "Response\"\000\022g\n\022UpdateNoteThumbsUp\022&.com.e" +
+      "xample.UpdateNoteThumbsUpRequest\032\'.com.e" +
+      "xample.UpdateNoteThumbsUpResponse\"\000\022O\n\nD" +
+      "eleteNote\022\036.com.example.DeleteNoteReques" +
+      "t\032\037.com.example.DeleteNoteResponse\"\000B%\n\017" +
+      "com.example.libB\020NoteServiceProtoP\001b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -77,7 +109,7 @@ public final class NoteServiceProto {
     internal_static_com_example_CreateNoteResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_example_CreateNoteResponse_descriptor,
-        new java.lang.String[] { "Success", "Message", });
+        new java.lang.String[] { "Success", "Message", "NoteId", });
     internal_static_com_example_ListNotesRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_example_ListNotesRequest_fieldAccessorTable = new
@@ -90,12 +122,36 @@ public final class NoteServiceProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_example_ListNotesResponse_descriptor,
         new java.lang.String[] { "Notes", });
-    internal_static_com_example_Note_descriptor =
+    internal_static_com_example_UpdateNoteThumbsUpRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_com_example_UpdateNoteThumbsUpRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_UpdateNoteThumbsUpRequest_descriptor,
+        new java.lang.String[] { "NoteId", });
+    internal_static_com_example_UpdateNoteThumbsUpResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_example_UpdateNoteThumbsUpResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_UpdateNoteThumbsUpResponse_descriptor,
+        new java.lang.String[] { "Success", "Message", "ThumbsUpCount", });
+    internal_static_com_example_DeleteNoteRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_example_DeleteNoteRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_DeleteNoteRequest_descriptor,
+        new java.lang.String[] { "NoteId", });
+    internal_static_com_example_DeleteNoteResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_example_DeleteNoteResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_DeleteNoteResponse_descriptor,
+        new java.lang.String[] { "Success", "Message", });
+    internal_static_com_example_Note_descriptor =
+      getDescriptor().getMessageTypes().get(8);
     internal_static_com_example_Note_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_example_Note_descriptor,
-        new java.lang.String[] { "Text", "Username", "CreatedAt", });
+        new java.lang.String[] { "Id", "Text", "Username", "CreatedAt", "ThumbsUpCount", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

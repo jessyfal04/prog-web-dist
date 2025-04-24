@@ -67,9 +67,13 @@ gRPCSpring/
 - REST API:
   - POST `/api/notes`: Create a new note
   - GET `/api/notes`: List all notes
+  - POST `/api/notes/{noteId}/thumbs-up`: Increment thumbs up count for a note
+  - DELETE `/api/notes/{noteId}`: Delete a specific note
 - gRPC Service:
-  - `CreateNote`: Server-side note creation
+  - `CreateNote`: Server-side note creation (returns note ID)
   - `ListNotes`: Server-side note retrieval
+  - `UpdateNoteThumbsUp`: Server-side thumbs up update
+  - `DeleteNote`: Server-side note deletion
 
 ## Implementation Details
 
@@ -78,6 +82,8 @@ gRPCSpring/
 service MyService {
   rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {}
   rpc ListNotes (ListNotesRequest) returns (ListNotesResponse) {}
+  rpc UpdateNoteThumbsUp (UpdateNoteThumbsUpRequest) returns (UpdateNoteThumbsUpResponse) {}
+  rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse) {}
 }
 
 message CreateNoteRequest {
@@ -100,6 +106,24 @@ message Note {
   string text = 1;
   string username = 2;
   string created_at = 3;
+}
+
+message UpdateNoteThumbsUpRequest {
+  string noteId = 1;
+}
+
+message UpdateNoteThumbsUpResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DeleteNoteRequest {
+  string noteId = 1;
+}
+
+message DeleteNoteResponse {
+  bool success = 1;
+  string message = 2;
 }
 ```
 
@@ -126,25 +150,6 @@ message Note {
    - Service stub injection
    - Protocol Buffers message handling
 
-## Build and Run
-
-1. Build the project:
-```bash
-./gradlew clean build
-```
-
-2. Start the server:
-```bash
-cd myServiceServer
-java -jar build/libs/myServiceServer-0.0.1-SNAPSHOT.jar
-```
-
-3. Start the client:
-```bash
-cd myServiceClient
-java -jar build/libs/myServiceClient-0.0.1-SNAPSHOT.jar
-```
-
 4. Access the application:
    - Create notes: http://localhost:8080/
    - View notes: http://localhost:8080/notes
@@ -165,13 +170,3 @@ java -jar build/libs/myServiceClient-0.0.1-SNAPSHOT.jar
 - Thymeleaf template configuration
 - Java 17 toolchain
 - Gradle build system with modern task configuration
-
-## Future Improvements
-1. Persistent storage (database integration)
-2. User authentication
-3. Note editing and deletion
-4. Real-time updates using WebSocket
-5. Enhanced error handling
-6. Input validation
-7. Rate limiting
-8. Caching layer

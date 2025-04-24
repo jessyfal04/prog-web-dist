@@ -80,6 +80,68 @@ public final class MyServiceGrpc {
     return getListNotesMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.example.lib.UpdateNoteThumbsUpRequest,
+      com.example.lib.UpdateNoteThumbsUpResponse> getUpdateNoteThumbsUpMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateNoteThumbsUp",
+      requestType = com.example.lib.UpdateNoteThumbsUpRequest.class,
+      responseType = com.example.lib.UpdateNoteThumbsUpResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.example.lib.UpdateNoteThumbsUpRequest,
+      com.example.lib.UpdateNoteThumbsUpResponse> getUpdateNoteThumbsUpMethod() {
+    io.grpc.MethodDescriptor<com.example.lib.UpdateNoteThumbsUpRequest, com.example.lib.UpdateNoteThumbsUpResponse> getUpdateNoteThumbsUpMethod;
+    if ((getUpdateNoteThumbsUpMethod = MyServiceGrpc.getUpdateNoteThumbsUpMethod) == null) {
+      synchronized (MyServiceGrpc.class) {
+        if ((getUpdateNoteThumbsUpMethod = MyServiceGrpc.getUpdateNoteThumbsUpMethod) == null) {
+          MyServiceGrpc.getUpdateNoteThumbsUpMethod = getUpdateNoteThumbsUpMethod =
+              io.grpc.MethodDescriptor.<com.example.lib.UpdateNoteThumbsUpRequest, com.example.lib.UpdateNoteThumbsUpResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateNoteThumbsUp"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.lib.UpdateNoteThumbsUpRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.lib.UpdateNoteThumbsUpResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new MyServiceMethodDescriptorSupplier("UpdateNoteThumbsUp"))
+              .build();
+        }
+      }
+    }
+    return getUpdateNoteThumbsUpMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.example.lib.DeleteNoteRequest,
+      com.example.lib.DeleteNoteResponse> getDeleteNoteMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteNote",
+      requestType = com.example.lib.DeleteNoteRequest.class,
+      responseType = com.example.lib.DeleteNoteResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.example.lib.DeleteNoteRequest,
+      com.example.lib.DeleteNoteResponse> getDeleteNoteMethod() {
+    io.grpc.MethodDescriptor<com.example.lib.DeleteNoteRequest, com.example.lib.DeleteNoteResponse> getDeleteNoteMethod;
+    if ((getDeleteNoteMethod = MyServiceGrpc.getDeleteNoteMethod) == null) {
+      synchronized (MyServiceGrpc.class) {
+        if ((getDeleteNoteMethod = MyServiceGrpc.getDeleteNoteMethod) == null) {
+          MyServiceGrpc.getDeleteNoteMethod = getDeleteNoteMethod =
+              io.grpc.MethodDescriptor.<com.example.lib.DeleteNoteRequest, com.example.lib.DeleteNoteResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteNote"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.lib.DeleteNoteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.lib.DeleteNoteResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new MyServiceMethodDescriptorSupplier("DeleteNote"))
+              .build();
+        }
+      }
+    }
+    return getDeleteNoteMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -150,6 +212,26 @@ public final class MyServiceGrpc {
         io.grpc.stub.StreamObserver<com.example.lib.ListNotesResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListNotesMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * Updates a note's thumbs up count
+     * </pre>
+     */
+    default void updateNoteThumbsUp(com.example.lib.UpdateNoteThumbsUpRequest request,
+        io.grpc.stub.StreamObserver<com.example.lib.UpdateNoteThumbsUpResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateNoteThumbsUpMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Deletes a note
+     * </pre>
+     */
+    default void deleteNote(com.example.lib.DeleteNoteRequest request,
+        io.grpc.stub.StreamObserver<com.example.lib.DeleteNoteResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteNoteMethod(), responseObserver);
+    }
   }
 
   /**
@@ -206,6 +288,28 @@ public final class MyServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getListNotesMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Updates a note's thumbs up count
+     * </pre>
+     */
+    public void updateNoteThumbsUp(com.example.lib.UpdateNoteThumbsUpRequest request,
+        io.grpc.stub.StreamObserver<com.example.lib.UpdateNoteThumbsUpResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateNoteThumbsUpMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Deletes a note
+     * </pre>
+     */
+    public void deleteNote(com.example.lib.DeleteNoteRequest request,
+        io.grpc.stub.StreamObserver<com.example.lib.DeleteNoteResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteNoteMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -245,6 +349,26 @@ public final class MyServiceGrpc {
     public com.example.lib.ListNotesResponse listNotes(com.example.lib.ListNotesRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListNotesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Updates a note's thumbs up count
+     * </pre>
+     */
+    public com.example.lib.UpdateNoteThumbsUpResponse updateNoteThumbsUp(com.example.lib.UpdateNoteThumbsUpRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateNoteThumbsUpMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Deletes a note
+     * </pre>
+     */
+    public com.example.lib.DeleteNoteResponse deleteNote(com.example.lib.DeleteNoteRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteNoteMethod(), getCallOptions(), request);
     }
   }
 
@@ -288,10 +412,34 @@ public final class MyServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getListNotesMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Updates a note's thumbs up count
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.lib.UpdateNoteThumbsUpResponse> updateNoteThumbsUp(
+        com.example.lib.UpdateNoteThumbsUpRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateNoteThumbsUpMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Deletes a note
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.lib.DeleteNoteResponse> deleteNote(
+        com.example.lib.DeleteNoteRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteNoteMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_NOTE = 0;
   private static final int METHODID_LIST_NOTES = 1;
+  private static final int METHODID_UPDATE_NOTE_THUMBS_UP = 2;
+  private static final int METHODID_DELETE_NOTE = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -317,6 +465,14 @@ public final class MyServiceGrpc {
         case METHODID_LIST_NOTES:
           serviceImpl.listNotes((com.example.lib.ListNotesRequest) request,
               (io.grpc.stub.StreamObserver<com.example.lib.ListNotesResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_NOTE_THUMBS_UP:
+          serviceImpl.updateNoteThumbsUp((com.example.lib.UpdateNoteThumbsUpRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.lib.UpdateNoteThumbsUpResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_NOTE:
+          serviceImpl.deleteNote((com.example.lib.DeleteNoteRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.lib.DeleteNoteResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -350,6 +506,20 @@ public final class MyServiceGrpc {
               com.example.lib.ListNotesRequest,
               com.example.lib.ListNotesResponse>(
                 service, METHODID_LIST_NOTES)))
+        .addMethod(
+          getUpdateNoteThumbsUpMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.example.lib.UpdateNoteThumbsUpRequest,
+              com.example.lib.UpdateNoteThumbsUpResponse>(
+                service, METHODID_UPDATE_NOTE_THUMBS_UP)))
+        .addMethod(
+          getDeleteNoteMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.example.lib.DeleteNoteRequest,
+              com.example.lib.DeleteNoteResponse>(
+                service, METHODID_DELETE_NOTE)))
         .build();
   }
 
@@ -400,6 +570,8 @@ public final class MyServiceGrpc {
               .setSchemaDescriptor(new MyServiceFileDescriptorSupplier())
               .addMethod(getCreateNoteMethod())
               .addMethod(getListNotesMethod())
+              .addMethod(getUpdateNoteThumbsUpMethod())
+              .addMethod(getDeleteNoteMethod())
               .build();
         }
       }

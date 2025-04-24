@@ -8,38 +8,56 @@ public interface NoteOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string text = 1;</code>
+   * <code>string id = 1;</code>
+   * @return The id.
+   */
+  java.lang.String getId();
+  /**
+   * <code>string id = 1;</code>
+   * @return The bytes for id.
+   */
+  com.google.protobuf.ByteString
+      getIdBytes();
+
+  /**
+   * <code>string text = 2;</code>
    * @return The text.
    */
   java.lang.String getText();
   /**
-   * <code>string text = 1;</code>
+   * <code>string text = 2;</code>
    * @return The bytes for text.
    */
   com.google.protobuf.ByteString
       getTextBytes();
 
   /**
-   * <code>string username = 2;</code>
+   * <code>string username = 3;</code>
    * @return The username.
    */
   java.lang.String getUsername();
   /**
-   * <code>string username = 2;</code>
+   * <code>string username = 3;</code>
    * @return The bytes for username.
    */
   com.google.protobuf.ByteString
       getUsernameBytes();
 
   /**
-   * <code>string created_at = 3;</code>
+   * <code>string created_at = 4;</code>
    * @return The createdAt.
    */
   java.lang.String getCreatedAt();
   /**
-   * <code>string created_at = 3;</code>
+   * <code>string created_at = 4;</code>
    * @return The bytes for createdAt.
    */
   com.google.protobuf.ByteString
       getCreatedAtBytes();
+
+  /**
+   * <code>int32 thumbs_up_count = 5;</code>
+   * @return The thumbsUpCount.
+   */
+  int getThumbsUpCount();
 }
