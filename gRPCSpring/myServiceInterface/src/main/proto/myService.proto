@@ -19,6 +19,9 @@ service MyService {
 
   // Deletes a note
   rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse) {}
+
+  // Gets a single note by ID
+  rpc GetNote (GetNoteRequest) returns (GetNoteResponse) {}
 }
 
 // Request to create a note
@@ -65,6 +68,18 @@ message DeleteNoteRequest {
 message DeleteNoteResponse {
   bool success = 1;
   string message = 2;
+}
+
+// Request to get a single note
+message GetNoteRequest {
+  string note_id = 1;
+}
+
+// Response for getting a single note
+message GetNoteResponse {
+  bool success = 1;
+  string message = 2;
+  Note note = 3;
 }
 
 // Note message definition

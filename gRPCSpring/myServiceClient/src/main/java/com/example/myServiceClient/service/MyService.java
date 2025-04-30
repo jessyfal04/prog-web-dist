@@ -36,4 +36,11 @@ public class MyService {
                 .build();
         return myServiceStub.deleteNote(request);
     }
+
+    public GetNoteResponse getNote(String noteId) {
+        GetNoteRequest request = GetNoteRequest.newBuilder()
+                .setNoteId(noteId)
+                .build();
+        return myServiceStub.getNote(request);
+    }
 }

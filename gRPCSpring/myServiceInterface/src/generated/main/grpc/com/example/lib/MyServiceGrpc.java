@@ -142,6 +142,37 @@ public final class MyServiceGrpc {
     return getDeleteNoteMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.example.lib.GetNoteRequest,
+      com.example.lib.GetNoteResponse> getGetNoteMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetNote",
+      requestType = com.example.lib.GetNoteRequest.class,
+      responseType = com.example.lib.GetNoteResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.example.lib.GetNoteRequest,
+      com.example.lib.GetNoteResponse> getGetNoteMethod() {
+    io.grpc.MethodDescriptor<com.example.lib.GetNoteRequest, com.example.lib.GetNoteResponse> getGetNoteMethod;
+    if ((getGetNoteMethod = MyServiceGrpc.getGetNoteMethod) == null) {
+      synchronized (MyServiceGrpc.class) {
+        if ((getGetNoteMethod = MyServiceGrpc.getGetNoteMethod) == null) {
+          MyServiceGrpc.getGetNoteMethod = getGetNoteMethod =
+              io.grpc.MethodDescriptor.<com.example.lib.GetNoteRequest, com.example.lib.GetNoteResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNote"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.lib.GetNoteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.lib.GetNoteResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new MyServiceMethodDescriptorSupplier("GetNote"))
+              .build();
+        }
+      }
+    }
+    return getGetNoteMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -232,6 +263,16 @@ public final class MyServiceGrpc {
         io.grpc.stub.StreamObserver<com.example.lib.DeleteNoteResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteNoteMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * Gets a single note by ID
+     * </pre>
+     */
+    default void getNote(com.example.lib.GetNoteRequest request,
+        io.grpc.stub.StreamObserver<com.example.lib.GetNoteResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNoteMethod(), responseObserver);
+    }
   }
 
   /**
@@ -310,6 +351,17 @@ public final class MyServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteNoteMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Gets a single note by ID
+     * </pre>
+     */
+    public void getNote(com.example.lib.GetNoteRequest request,
+        io.grpc.stub.StreamObserver<com.example.lib.GetNoteResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetNoteMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -369,6 +421,16 @@ public final class MyServiceGrpc {
     public com.example.lib.DeleteNoteResponse deleteNote(com.example.lib.DeleteNoteRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteNoteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Gets a single note by ID
+     * </pre>
+     */
+    public com.example.lib.GetNoteResponse getNote(com.example.lib.GetNoteRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetNoteMethod(), getCallOptions(), request);
     }
   }
 
@@ -434,12 +496,24 @@ public final class MyServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteNoteMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Gets a single note by ID
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.lib.GetNoteResponse> getNote(
+        com.example.lib.GetNoteRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetNoteMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_NOTE = 0;
   private static final int METHODID_LIST_NOTES = 1;
   private static final int METHODID_UPDATE_NOTE_THUMBS_UP = 2;
   private static final int METHODID_DELETE_NOTE = 3;
+  private static final int METHODID_GET_NOTE = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -473,6 +547,10 @@ public final class MyServiceGrpc {
         case METHODID_DELETE_NOTE:
           serviceImpl.deleteNote((com.example.lib.DeleteNoteRequest) request,
               (io.grpc.stub.StreamObserver<com.example.lib.DeleteNoteResponse>) responseObserver);
+          break;
+        case METHODID_GET_NOTE:
+          serviceImpl.getNote((com.example.lib.GetNoteRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.lib.GetNoteResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -520,6 +598,13 @@ public final class MyServiceGrpc {
               com.example.lib.DeleteNoteRequest,
               com.example.lib.DeleteNoteResponse>(
                 service, METHODID_DELETE_NOTE)))
+        .addMethod(
+          getGetNoteMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.example.lib.GetNoteRequest,
+              com.example.lib.GetNoteResponse>(
+                service, METHODID_GET_NOTE)))
         .build();
   }
 
@@ -572,6 +657,7 @@ public final class MyServiceGrpc {
               .addMethod(getListNotesMethod())
               .addMethod(getUpdateNoteThumbsUpMethod())
               .addMethod(getDeleteNoteMethod())
+              .addMethod(getGetNoteMethod())
               .build();
         }
       }

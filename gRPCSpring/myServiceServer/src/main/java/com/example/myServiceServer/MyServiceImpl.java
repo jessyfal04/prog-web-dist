@@ -107,4 +107,37 @@ public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void getNote(GetNoteRequest request, StreamObserver<GetNoteResponse> responseObserver) {
+        Long noteId = Long.parseLong(request.getNoteId());
+        NoteEntity noteEntity = noteRepository.findById(noteId).orElse(null);
+
+        if (noteEntity != null) {
+            Note note = Note.newBuilder()
+                    .setId(noteEntity.getId().toString())
+                    .setText(noteEntity.getText())
+                    .setUsername(noteEntity.getUsername())
+                    .setCreatedAt(noteEntity.getCreatedAt().format(formatter))
+                    .setThumbsUpCount(noteEntity.getThumbsUpCount())
+                    .build();
+
+            GetNoteResponse response = GetNoteResponse.newBuilder()
+                    .setSuccess(true)
+                    .setMessage("Note retrieved successfully")
+                    .setNote(note)
+                    .build();
+
+            responseObserver.onNext(response);
+        } else {
+            GetNoteResponse response = GetNoteResponse.newBuilder()
+                    .setSuccess(false)
+                    .setMessage("Note not found")
+                    .build();
+
+            responseObserver.onNext(response);
+        }
+
+        responseObserver.onCompleted();
+    }
 }

@@ -5,6 +5,7 @@ import com.example.lib.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +48,32 @@ public class WebService {
     public DeleteResponseDTO deleteNote(@PathVariable String noteId) {
         DeleteNoteResponse response = myService.deleteNote(noteId);
         return new DeleteResponseDTO(response.getSuccess(), response.getMessage());
+    }
+
+    @GetMapping("/api/notes/{noteId}")
+    @ResponseStatus(HttpStatus.OK)
+    public NoteDTO getNote(@PathVariable String noteId) {
+        GetNoteResponse response = myService.getNote(noteId);
+        if (!response.getSuccess()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage());
+        }
+        com.example.lib.Note note = response.getNote();
+        return new NoteDTO(note.getId(), note.getText(), note.getUsername(), note.getCreatedAt(), note.getThumbsUpCount());
+    }
+
+    @GetMapping("/api/notes/{noteId}/markdown")
+    @ResponseStatus(HttpStatus.OK)
+    public String exportNoteToMarkdown(@PathVariable String noteId) {
+        GetNoteResponse response = myService.getNote(noteId);
+        if (!response.getSuccess()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, response.getMessage());
+        }
+        com.example.lib.Note note = response.getNote();
+        return String.format("# Note by %s\n\n%s\n\nCreated at: %s\nThumbs up: %d",
+                note.getUsername(),
+                note.getText(),
+                note.getCreatedAt(),
+                note.getThumbsUpCount());
     }
 
     public static class NoteDTO {

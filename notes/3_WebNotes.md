@@ -6,6 +6,7 @@ This project implements a distributed note-taking application using gRPC (Google
 - A gRPC client that provides a web interface
 - A shared interface module that defines the service contract
 - A MySQL database for persistent storage
+- A static resource system for handling images and other static content
 
 ## Project Structure
 ```
@@ -37,7 +38,8 @@ gRPCSpring/
     ├── src/main/resources/
     │   └── templates/
     │       ├── create-note.html           # Create note form
-    │       └── list-notes.html            # Notes list view
+    │       ├── list-notes.html            # Notes list view
+    │       └── view-note.html             # Individual note view
     └── build.gradle            # Client module build configuration
 ```
 
@@ -88,7 +90,20 @@ CREATE TABLE notes (
 
 ## Functionality
 
-### 1. Note Creation
+### 1. Note Listing (Main Page)
+- The main page (`/`) displays all notes in a card layout
+- Each note card displays:
+  - Username
+  - Note text
+  - Creation timestamp
+  - Thumbs up count
+- List auto-refreshes every 5 seconds
+- Real-time updates without page refresh
+- Data is fetched from MySQL database
+- Each note card links to its individual view page
+
+### 2. Note Creation
+- Accessible at `/create`
 - Users can create notes through a web form
 - Each note contains:
   - Text content
@@ -98,25 +113,42 @@ CREATE TABLE notes (
 - Success/error messages are displayed without page refresh
 - Notes are persisted in MySQL database
 
-### 2. Note Listing
-- Users can view all notes in a card layout
-- Each note card displays:
+### 3. Individual Note View
+- Accessible at `/notes/{id}`
+- Displays detailed view of a single note
+- Shows:
   - Username
   - Note text
   - Creation timestamp
-- List auto-refreshes every 5 seconds
-- Real-time updates without page refresh
-- Data is fetched from MySQL database
+  - Thumbs up count
+- Provides functionality to:
+  - Thumbs up the note
+  - Delete the note
+  - Export the note as Markdown
+  - Return to the main list
 
-### 3. API Endpoints
+### 4. Note Export
+- Available on individual note view
+- Exports note content as Markdown file
+- Includes:
+  - Note text
+  - Username
+  - Creation timestamp
+  - Thumbs up count
+- File is automatically downloaded when clicking export button
+
+### 5. API Endpoints
 - REST API:
   - POST `/api/notes`: Create a new note
   - GET `/api/notes`: List all notes
+  - GET `/api/notes/{id}`: Get a single note by ID
+  - GET `/api/notes/{id}/markdown`: Export a note as Markdown
   - POST `/api/notes/{noteId}/thumbs-up`: Increment thumbs up count for a note
   - DELETE `/api/notes/{noteId}`: Delete a specific note
 - gRPC Service:
   - `CreateNote`: Server-side note creation (returns note ID)
   - `ListNotes`: Server-side note retrieval
+  - `GetNote`: Server-side single note retrieval
   - `UpdateNoteThumbsUp`: Server-side thumbs up update
   - `DeleteNote`: Server-side note deletion
 
@@ -127,6 +159,7 @@ CREATE TABLE notes (
 service MyService {
   rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {}
   rpc ListNotes (ListNotesRequest) returns (ListNotesResponse) {}
+  rpc GetNote (GetNoteRequest) returns (GetNoteResponse) {}
   rpc UpdateNoteThumbsUp (UpdateNoteThumbsUpRequest) returns (UpdateNoteThumbsUpResponse) {}
   rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse) {}
 }
@@ -146,6 +179,16 @@ message ListNotesRequest {}
 
 message ListNotesResponse {
   repeated Note notes = 1;
+}
+
+message GetNoteRequest {
+  string note_id = 1;
+}
+
+message GetNoteResponse {
+  bool success = 1;
+  string message = 2;
+  Note note = 3;
 }
 
 message Note {
@@ -189,6 +232,7 @@ message DeleteNoteResponse {
    - Bootstrap for styling
    - AJAX for form submission
    - Real-time updates
+   - Individual note view with export functionality
 
 2. **REST API**:
    - JSON responses
@@ -199,26 +243,3 @@ message DeleteNoteResponse {
    - `@GrpcClient` annotation
    - Service stub injection
    - Protocol Buffers message handling
-
-
-
-## Dependencies
-- Spring Boot 3.3.3
-- Spring Dependency Management 1.1.6
-- gRPC Spring Boot Starter 2.15.0.RELEASE
-- Thymeleaf
-- Bootstrap 5.1.3
-- Protocol Buffers 3.23.4
-- gRPC 1.58.0
-- Protobuf Gradle Plugin 0.8.18
-- MySQL Connector 8.0.33
-- Spring Data JPA
-- Hibernate
-
-## Configuration
-- Server port: 8080
-- gRPC server port: 9090
-- MySQL port: 3306
-- Thymeleaf template configuration
-- Java 17 toolchain
-- Gradle build system with modern task configuration
