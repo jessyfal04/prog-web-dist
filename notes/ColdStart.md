@@ -67,6 +67,7 @@ minikube cp static/styles.css /data/static-webnotes/styles.css
 ```
 
 # Verify volume setup
+```bash
 kubectl get pv
 kubectl get pvc -n webnotes
 ```
