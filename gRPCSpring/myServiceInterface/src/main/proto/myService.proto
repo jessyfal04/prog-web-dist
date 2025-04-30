@@ -39,7 +39,11 @@ message CreateNoteResponse {
 
 // Request to list notes
 message ListNotesRequest {
-  // Empty request
+  enum SortBy {
+    RECENT = 0;
+    POPULAR = 1;
+  }
+  SortBy sort_by = 1;
 }
 
 // Response containing list of notes

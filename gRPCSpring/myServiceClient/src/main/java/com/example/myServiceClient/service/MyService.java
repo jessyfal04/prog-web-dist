@@ -3,6 +3,8 @@ package com.example.myServiceClient.service;
 import com.example.lib.*;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MyService {
@@ -18,9 +20,13 @@ public class MyService {
         return myServiceStub.createNote(request);
     }
 
-    public ListNotesResponse listNotes() {
-        ListNotesRequest request = ListNotesRequest.newBuilder().build();
-        return myServiceStub.listNotes(request);
+    public List<com.example.lib.Note> listNotes(boolean sortByPopularity) {
+        ListNotesRequest request = ListNotesRequest.newBuilder()
+            .setSortBy(sortByPopularity ? ListNotesRequest.SortBy.POPULAR : ListNotesRequest.SortBy.RECENT)
+            .build();
+        
+        ListNotesResponse response = myServiceStub.listNotes(request);
+        return response.getNotesList();
     }
 
     public UpdateNoteThumbsUpResponse updateNoteThumbsUp(String noteId) {

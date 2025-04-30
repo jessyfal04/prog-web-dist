@@ -81,32 +81,35 @@ public final class NoteServiceProto {
       "\n\017myService.proto\022\013com.example\"3\n\021Create" +
       "NoteRequest\022\014\n\004text\030\001 \001(\t\022\020\n\010username\030\002 " +
       "\001(\t\"G\n\022CreateNoteResponse\022\017\n\007success\030\001 \001" +
-      "(\010\022\017\n\007message\030\002 \001(\t\022\017\n\007note_id\030\003 \001(\t\"\022\n\020" +
-      "ListNotesRequest\"5\n\021ListNotesResponse\022 \n" +
-      "\005notes\030\001 \003(\0132\021.com.example.Note\",\n\031Updat" +
-      "eNoteThumbsUpRequest\022\017\n\007note_id\030\001 \001(\t\"W\n" +
-      "\032UpdateNoteThumbsUpResponse\022\017\n\007success\030\001" +
-      " \001(\010\022\017\n\007message\030\002 \001(\t\022\027\n\017thumbs_up_count" +
-      "\030\003 \001(\005\"$\n\021DeleteNoteRequest\022\017\n\007note_id\030\001" +
-      " \001(\t\"6\n\022DeleteNoteResponse\022\017\n\007success\030\001 " +
-      "\001(\010\022\017\n\007message\030\002 \001(\t\"!\n\016GetNoteRequest\022\017" +
-      "\n\007note_id\030\001 \001(\t\"T\n\017GetNoteResponse\022\017\n\007su" +
-      "ccess\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\022\037\n\004note\030\003 \001" +
-      "(\0132\021.com.example.Note\"_\n\004Note\022\n\n\002id\030\001 \001(" +
-      "\t\022\014\n\004text\030\002 \001(\t\022\020\n\010username\030\003 \001(\t\022\022\n\ncre" +
-      "ated_at\030\004 \001(\t\022\027\n\017thumbs_up_count\030\005 \001(\0052\254" +
-      "\003\n\tMyService\022O\n\nCreateNote\022\036.com.example" +
-      ".CreateNoteRequest\032\037.com.example.CreateN" +
-      "oteResponse\"\000\022L\n\tListNotes\022\035.com.example" +
-      ".ListNotesRequest\032\036.com.example.ListNote" +
-      "sResponse\"\000\022g\n\022UpdateNoteThumbsUp\022&.com." +
-      "example.UpdateNoteThumbsUpRequest\032\'.com." +
-      "example.UpdateNoteThumbsUpResponse\"\000\022O\n\n" +
-      "DeleteNote\022\036.com.example.DeleteNoteReque" +
-      "st\032\037.com.example.DeleteNoteResponse\"\000\022F\n" +
-      "\007GetNote\022\033.com.example.GetNoteRequest\032\034." +
-      "com.example.GetNoteResponse\"\000B%\n\017com.exa" +
-      "mple.libB\020NoteServiceProtoP\001b\006proto3"
+      "(\010\022\017\n\007message\030\002 \001(\t\022\017\n\007note_id\030\003 \001(\t\"l\n\020" +
+      "ListNotesRequest\0225\n\007sort_by\030\001 \001(\0162$.com." +
+      "example.ListNotesRequest.SortBy\"!\n\006SortB" +
+      "y\022\n\n\006RECENT\020\000\022\013\n\007POPULAR\020\001\"5\n\021ListNotesR" +
+      "esponse\022 \n\005notes\030\001 \003(\0132\021.com.example.Not" +
+      "e\",\n\031UpdateNoteThumbsUpRequest\022\017\n\007note_i" +
+      "d\030\001 \001(\t\"W\n\032UpdateNoteThumbsUpResponse\022\017\n" +
+      "\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\022\027\n\017thumb" +
+      "s_up_count\030\003 \001(\005\"$\n\021DeleteNoteRequest\022\017\n" +
+      "\007note_id\030\001 \001(\t\"6\n\022DeleteNoteResponse\022\017\n\007" +
+      "success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"!\n\016GetNot" +
+      "eRequest\022\017\n\007note_id\030\001 \001(\t\"T\n\017GetNoteResp" +
+      "onse\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\022\037" +
+      "\n\004note\030\003 \001(\0132\021.com.example.Note\"_\n\004Note\022" +
+      "\n\n\002id\030\001 \001(\t\022\014\n\004text\030\002 \001(\t\022\020\n\010username\030\003 " +
+      "\001(\t\022\022\n\ncreated_at\030\004 \001(\t\022\027\n\017thumbs_up_cou" +
+      "nt\030\005 \001(\0052\254\003\n\tMyService\022O\n\nCreateNote\022\036.c" +
+      "om.example.CreateNoteRequest\032\037.com.examp" +
+      "le.CreateNoteResponse\"\000\022L\n\tListNotes\022\035.c" +
+      "om.example.ListNotesRequest\032\036.com.exampl" +
+      "e.ListNotesResponse\"\000\022g\n\022UpdateNoteThumb" +
+      "sUp\022&.com.example.UpdateNoteThumbsUpRequ" +
+      "est\032\'.com.example.UpdateNoteThumbsUpResp" +
+      "onse\"\000\022O\n\nDeleteNote\022\036.com.example.Delet" +
+      "eNoteRequest\032\037.com.example.DeleteNoteRes" +
+      "ponse\"\000\022F\n\007GetNote\022\033.com.example.GetNote" +
+      "Request\032\034.com.example.GetNoteResponse\"\000B" +
+      "%\n\017com.example.libB\020NoteServiceProtoP\001b\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -129,7 +132,7 @@ public final class NoteServiceProto {
     internal_static_com_example_ListNotesRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_example_ListNotesRequest_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "SortBy", });
     internal_static_com_example_ListNotesResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_example_ListNotesResponse_fieldAccessorTable = new

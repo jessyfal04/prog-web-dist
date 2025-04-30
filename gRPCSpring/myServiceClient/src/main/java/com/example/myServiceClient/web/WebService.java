@@ -4,6 +4,7 @@ import com.example.myServiceClient.service.MyService;
 import com.example.lib.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,12 +29,23 @@ public class WebService {
     }
 
     @GetMapping("/api/notes")
-    @ResponseStatus(HttpStatus.OK)
-    public List<NoteDTO> listNotes() {
-        ListNotesResponse response = myService.listNotes();
-        return response.getNotesList().stream()
-                .map(note -> new NoteDTO(note.getId(), note.getText(), note.getUsername(), note.getCreatedAt(), note.getThumbsUpCount()))
+    public ResponseEntity<List<NoteDTO>> listNotes(
+            @RequestParam(required = false, defaultValue = "false") boolean sortByPopularity) {
+        try {
+            List<com.example.lib.Note> notes = myService.listNotes(sortByPopularity);
+            List<NoteDTO> noteDTOs = notes.stream()
+                .map(note -> new NoteDTO(
+                    note.getId(),
+                    note.getText(),
+                    note.getUsername(),
+                    note.getCreatedAt(),
+                    note.getThumbsUpCount()
+                ))
                 .collect(Collectors.toList());
+            return ResponseEntity.ok(noteDTOs);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/api/notes/{noteId}/thumbs-up")

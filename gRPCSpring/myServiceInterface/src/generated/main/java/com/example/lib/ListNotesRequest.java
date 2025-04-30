@@ -20,6 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ListNotesRequest() {
+    sortBy_ = 0;
   }
 
   @java.lang.Override
@@ -42,6 +43,132 @@ private static final long serialVersionUID = 0L;
             com.example.lib.ListNotesRequest.class, com.example.lib.ListNotesRequest.Builder.class);
   }
 
+  /**
+   * Protobuf enum {@code com.example.ListNotesRequest.SortBy}
+   */
+  public enum SortBy
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>RECENT = 0;</code>
+     */
+    RECENT(0),
+    /**
+     * <code>POPULAR = 1;</code>
+     */
+    POPULAR(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>RECENT = 0;</code>
+     */
+    public static final int RECENT_VALUE = 0;
+    /**
+     * <code>POPULAR = 1;</code>
+     */
+    public static final int POPULAR_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static SortBy valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static SortBy forNumber(int value) {
+      switch (value) {
+        case 0: return RECENT;
+        case 1: return POPULAR;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<SortBy>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        SortBy> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<SortBy>() {
+            public SortBy findValueByNumber(int number) {
+              return SortBy.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.example.lib.ListNotesRequest.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final SortBy[] VALUES = values();
+
+    public static SortBy valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private SortBy(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.example.ListNotesRequest.SortBy)
+  }
+
+  public static final int SORT_BY_FIELD_NUMBER = 1;
+  private int sortBy_ = 0;
+  /**
+   * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+   * @return The enum numeric value on the wire for sortBy.
+   */
+  @java.lang.Override public int getSortByValue() {
+    return sortBy_;
+  }
+  /**
+   * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+   * @return The sortBy.
+   */
+  @java.lang.Override public com.example.lib.ListNotesRequest.SortBy getSortBy() {
+    com.example.lib.ListNotesRequest.SortBy result = com.example.lib.ListNotesRequest.SortBy.forNumber(sortBy_);
+    return result == null ? com.example.lib.ListNotesRequest.SortBy.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -56,6 +183,9 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (sortBy_ != com.example.lib.ListNotesRequest.SortBy.RECENT.getNumber()) {
+      output.writeEnum(1, sortBy_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -65,6 +195,10 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (sortBy_ != com.example.lib.ListNotesRequest.SortBy.RECENT.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(1, sortBy_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -80,6 +214,7 @@ private static final long serialVersionUID = 0L;
     }
     com.example.lib.ListNotesRequest other = (com.example.lib.ListNotesRequest) obj;
 
+    if (sortBy_ != other.sortBy_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -91,6 +226,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + SORT_BY_FIELD_NUMBER;
+    hash = (53 * hash) + sortBy_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -225,6 +362,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
+      sortBy_ = 0;
       return this;
     }
 
@@ -251,8 +390,16 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.example.lib.ListNotesRequest buildPartial() {
       com.example.lib.ListNotesRequest result = new com.example.lib.ListNotesRequest(this);
+      if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartial0(com.example.lib.ListNotesRequest result) {
+      int from_bitField0_ = bitField0_;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.sortBy_ = sortBy_;
+      }
     }
 
     @java.lang.Override
@@ -299,6 +446,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.example.lib.ListNotesRequest other) {
       if (other == com.example.lib.ListNotesRequest.getDefaultInstance()) return this;
+      if (other.sortBy_ != 0) {
+        setSortByValue(other.getSortByValue());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -325,6 +475,11 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
+            case 8: {
+              sortBy_ = input.readEnum();
+              bitField0_ |= 0x00000001;
+              break;
+            } // case 8
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -338,6 +493,60 @@ private static final long serialVersionUID = 0L;
       } finally {
         onChanged();
       } // finally
+      return this;
+    }
+    private int bitField0_;
+
+    private int sortBy_ = 0;
+    /**
+     * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+     * @return The enum numeric value on the wire for sortBy.
+     */
+    @java.lang.Override public int getSortByValue() {
+      return sortBy_;
+    }
+    /**
+     * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+     * @param value The enum numeric value on the wire for sortBy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSortByValue(int value) {
+      sortBy_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+     * @return The sortBy.
+     */
+    @java.lang.Override
+    public com.example.lib.ListNotesRequest.SortBy getSortBy() {
+      com.example.lib.ListNotesRequest.SortBy result = com.example.lib.ListNotesRequest.SortBy.forNumber(sortBy_);
+      return result == null ? com.example.lib.ListNotesRequest.SortBy.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+     * @param value The sortBy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSortBy(com.example.lib.ListNotesRequest.SortBy value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000001;
+      sortBy_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearSortBy() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      sortBy_ = 0;
+      onChanged();
       return this;
     }
     @java.lang.Override

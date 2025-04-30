@@ -6,4 +6,15 @@ package com.example.lib;
 public interface ListNotesRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:com.example.ListNotesRequest)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+   * @return The enum numeric value on the wire for sortBy.
+   */
+  int getSortByValue();
+  /**
+   * <code>.com.example.ListNotesRequest.SortBy sort_by = 1;</code>
+   * @return The sortBy.
+   */
+  com.example.lib.ListNotesRequest.SortBy getSortBy();
 }

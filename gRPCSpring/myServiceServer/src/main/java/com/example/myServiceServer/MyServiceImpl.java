@@ -41,24 +41,30 @@ public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
 
     @Override
     public void listNotes(ListNotesRequest request, StreamObserver<ListNotesResponse> responseObserver) {
-        List<NoteEntity> noteEntities = noteRepository.findAll();
-        
-        List<Note> notes = noteEntities.stream()
-                .map(entity -> Note.newBuilder()
-                        .setId(entity.getId().toString())
-                        .setText(entity.getText())
-                        .setUsername(entity.getUsername())
-                        .setCreatedAt(entity.getCreatedAt().format(formatter))
-                        .setThumbsUpCount(entity.getThumbsUpCount())
-                        .build())
-                .collect(Collectors.toList());
-        
-        ListNotesResponse response = ListNotesResponse.newBuilder()
-                .addAllNotes(notes)
-                .build();
-        
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
+        try {
+            List<NoteEntity> notes;
+            if (request.getSortBy() == ListNotesRequest.SortBy.POPULAR) {
+                notes = noteRepository.findAllByOrderByThumbsUpCountDesc();
+            } else {
+                notes = noteRepository.findAllByOrderByCreatedAtDesc();
+            }
+            
+            ListNotesResponse.Builder responseBuilder = ListNotesResponse.newBuilder();
+            for (NoteEntity note : notes) {
+                responseBuilder.addNotes(Note.newBuilder()
+                    .setId(String.valueOf(note.getId()))
+                    .setText(note.getText())
+                    .setUsername(note.getUsername())
+                    .setCreatedAt(note.getCreatedAt().toString())
+                    .setThumbsUpCount(note.getThumbsUpCount())
+                    .build());
+            }
+            
+            responseObserver.onNext(responseBuilder.build());
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            responseObserver.onError(e);
+        }
     }
 
     @Override
