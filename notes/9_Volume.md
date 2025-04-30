@@ -67,9 +67,10 @@ spring.mvc.static-path-pattern=/static/**
 ```
 
 ### HTML Template Configuration
-Add the following line in the `<head>` section of your HTML templates:
+Add the following lines in the `<head>` section of your HTML templates:
 ```html
 <link rel="icon" type="image/png" href="/static/favicon.png">
+<link rel="stylesheet" href="/static/styles.css">
 ```
 
 ## Setup Commands
@@ -99,7 +100,9 @@ kubectl get pvc -n webnotes
 ```bash
 # Copy static files to Minikube VM
 minikube cp static/favicon.png /data/static-webnotes/favicon.png
+minikube cp static/styles.css /data/static-webnotes/styles.css
 ```
+
 
 ### 4. Verify Volume Mounting
 ```bash
@@ -137,4 +140,6 @@ kubectl describe pod -n webnotes $(kubectl get pods -n webnotes | grep webnotes-
 ## Directory Structure
 - Minikube path: `/data/static-webnotes`
 - Container path: `/static`
-- Current images location: `static/*.png`
+- Current static files:
+  - `static/favicon.png`
+  - `static/styles.css`

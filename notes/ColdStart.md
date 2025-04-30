@@ -60,7 +60,11 @@ minikube ssh "sudo rm -rf /data/static-webnotes && sudo mkdir -p /data/static-we
 kubectl apply -f k8s/webnotes-volume.yml
 
 # Copy static files to Minikube VM
+```bash
+# Copy static files to Minikube VM
 minikube cp static/favicon.png /data/static-webnotes/favicon.png
+minikube cp static/styles.css /data/static-webnotes/styles.css
+```
 
 # Verify volume setup
 kubectl get pv

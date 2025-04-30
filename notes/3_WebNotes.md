@@ -6,7 +6,7 @@ This project implements a distributed note-taking application using gRPC (Google
 - A gRPC client that provides a web interface
 - A shared interface module that defines the service contract
 - A MySQL database for persistent storage
-- A static resource system for handling images and other static content
+- A static resource system for handling images, stylesheets, and other static content
 
 ## Project Structure
 ```
@@ -262,3 +262,11 @@ The service defines the following RPC methods and messages:
    - Service stub injection
    - Protocol Buffers message handling
    - Sorting support implementation
+
+### Static Resources
+The application uses a static resource system for serving:
+- Images (favicon.png)
+- Stylesheets (styles.css)
+- Other static content
+
+The static resources are served from the `/static` directory and are accessible via the `/static/**` URL pattern. The resources are mounted in Kubernetes using a PersistentVolume and PersistentVolumeClaim.
