@@ -25,6 +25,14 @@ spec:
               value: "webnotes-server"
             - name: GRPC_SERVER_PORT
               value: "9090"
+          volumeMounts:
+            - name: static-volume
+              mountPath: /static
+              readOnly: true
+      volumes:
+        - name: static-volume
+          persistentVolumeClaim:
+            claimName: webnotes-static-pvc
 ---
 apiVersion: v1
 kind: Service

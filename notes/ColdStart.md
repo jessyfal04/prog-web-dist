@@ -21,7 +21,7 @@ istioctl install --set profile=demo -y
 cd ..
 ```
 
-## 4. Create and Configure Namespace
+## 4. Create Namespace and Enable Istio Injection
 ```bash
 kubectl create ns webnotes
 kubectl label ns webnotes istio-injection=enabled
@@ -51,19 +51,35 @@ kubectl apply -f k8s/mysql-deployment.yaml -n webnotes
 kubectl apply -f k8s/mysql-secret.yaml -n webnotes
 ```
 
-## 7. Deploy Application Components
+## 7. Set Up Static Volume
+```bash
+# Create directory in Minikube VM
+minikube ssh "sudo rm -rf /data/static-webnotes && sudo mkdir -p /data/static-webnotes && sudo chmod 777 /data/static-webnotes"
+
+# Apply volume configuration
+kubectl apply -f k8s/webnotes-volume.yml
+
+# Copy static files to Minikube VM
+minikube cp static/favicon.png /data/static-webnotes/favicon.png
+
+# Verify volume setup
+kubectl get pv
+kubectl get pvc -n webnotes
+```
+
+## 8. Deploy Application Components
 ```bash
 kubectl apply -f k8s/webnotes-server.yml -n webnotes
 kubectl apply -f k8s/webnotes-client.yml -n webnotes
 kubectl apply -f k8s/webnotes-gateway.yml -n webnotes
 ```
 
-## 8. Start Minikube Tunnel
+## 9. Start Minikube Tunnel
 ```bash
 minikube tunnel &
 ```
 
-## 9. Verify Deployment
+## 10. Verify Deployment
 
 ### Get Istio Gateway IP
 ```bash
@@ -80,7 +96,15 @@ kubectl get pods -n webnotes
 kubectl exec -it $(kubectl get pods -n webnotes | grep mysql | awk '{print $1}') -n webnotes -- mysql -uuser -ptest1234 -e "USE db; DESCRIBE notes; SELECT * FROM notes;"
 ```
 
-### rollout
+### Verify Volume Mounting
+```bash
+# Check volume mounting in pods
+kubectl exec -n webnotes $(kubectl get pods -n webnotes | grep webnotes-client | head -n 1 | awk '{print $1}') -- ls -la /static
+```
+
+### Rollout
 ```bash
 kubectl rollout restart deployment webnotes-server -n webnotes && kubectl rollout restart deployment webnotes-client -n webnotes
+
+kubectl get deployments -n webnotes -o name | xargs -I {} kubectl rollout restart {} -n webnotes
 ```
